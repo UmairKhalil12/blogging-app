@@ -1,0 +1,18 @@
+.form-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.form-main div{
+    padding: 0.75rem;
+}
+
+.form-main-div{
+    background-color: lightblue;
+    padding: 16px 16px;
+    border-radius: 5px;
+    box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.5);
+}
