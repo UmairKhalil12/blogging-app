@@ -1,9 +1,8 @@
-import { useState } from 'react'
 import './Input.css'
 import useStore from '../../Utility/Zustand/Zustand';
 
 export default function Input({ type, placeholder }) {
-  const { email, pass, name, setEmail, setPass, setName } = useStore();
+  const {setEmail, setPass, setName } = useStore();
 
   // console.log('email ', email)
   // console.log('pass', pass)

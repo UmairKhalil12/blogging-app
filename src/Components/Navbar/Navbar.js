@@ -3,9 +3,12 @@ import './Navbar.css'
 import { IoMdMenu } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
 import Button from '../Button/Button';
+import useStore from '../../Utility/Zustand/Zustand'
 
 export default function Navbar() {
     const [toggleMenu, setToggleMenu] = useState(false)
+    const { user } = useStore();
+    // console.log("Navbar user" , user) 
 
     const handleToggleMenu = () => {
         setToggleMenu(!toggleMenu)
@@ -25,8 +28,15 @@ export default function Navbar() {
                 </div>
 
                 <div className={toggleMenu ? 'navbar-main-login-responsive' : 'navbar-main-login'}>
-                    <Button text='Signup' />
-                    <Button text='Login' />
+                    {user ?
+                        (<>
+                            <Button text='Signout'  />
+                        </>
+                        ) :
+                        <>
+                            <Button text='Signup' />
+                            <Button text='Login' />
+                        </>}
                 </div>
 
                 <div className='navbar-main-icon' onClick={handleToggleMenu} >
