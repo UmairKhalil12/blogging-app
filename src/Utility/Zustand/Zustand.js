@@ -1,17 +1,16 @@
 import create from 'zustand';
-// import { onAuthStateChanged } from 'firebase/auth';
-// import { auth } from '../Firebase/firebase';
-// import { useEffect, useState } from 'react';
 
 const useStore = create((set) => ({
     email: '',
     pass: '',
     name: '',
     user: null,
+    userInfo : null,
     setEmail: (value) => set({ email: value }),
     setPass: (value) => set({ pass: value }),
     setName: (value) => set({ name: value }),
     setUser: (value) => set(({user : value })),
+    setUserInfo : (value) => set(({userInfo : value}))
 
   }));
 

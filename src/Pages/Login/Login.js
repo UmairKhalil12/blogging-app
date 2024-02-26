@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import useStore from '../../Utility/Zustand/Zustand'
 import { auth } from '../../Utility/Firebase/firebase'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Login() {
@@ -15,11 +17,11 @@ export default function Login() {
   const handleLogin = (event) => {
     event.preventDefault();
     signInWithEmailAndPassword(auth, email, pass).then((userCredential) => {
-      alert("Logged in Successfully", userCredential.user.email)
+      toast.success("Logged in Successfully")
       navigate('/home')
     })
       .catch((error) => {
-        alert("Error logging in", error.message)
+        toast.error("Error logging in")
         console.log("Error logging in ", error)
         console.log("Error logging in ,error message ", error.message)
       })
@@ -27,21 +29,26 @@ export default function Login() {
   }
 
   return (
-    <div className='form-main'>
+    <>
+      <div className='form-main'>
+        <form className='form-main-div' onSubmit={handleLogin}>
+          <Label text='Enter your Email' />
+          <Input type='email' />
 
-      <form className='form-main-div' onSubmit={handleLogin}>
-        <Label text='Enter your Email' />
-        <Input type='email' />
+          <Label text='Enter your password' />
+          <Input type='password' />
 
-        <Label text='Enter your password' />
-        <Input type='password' />
+          <Button text='Login' />
 
-        <Button text='Login' />
+          <p className='form-link-p' onClick={()=>navigate('/forgetpassword')}>Forget Password?</p>
 
-        <p className='form-link-p' onClick={() => navigate('/signup')}>Don't have an Account? Signup</p>
+          <p className='form-link-p' onClick={() => navigate('/signup')}>Don't have an Account? Signup</p>
+          
 
-      </form>
+        </form>
+      </div>
 
-    </div>
+      <ToastContainer />
+    </>
   )
 }

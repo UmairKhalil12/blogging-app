@@ -6,6 +6,7 @@ import Signup from '../Signup/Signup'
 import AddEditBlog from '../AddEditBlog/AddEditBlog'
 import About from '../About/About'
 import NoPage from "../NoPage/NoPage";
+import ForgetPassword from "../ForgetPassword/ForgetPassword";
 
 export default function Routing() {
     return (
@@ -15,10 +16,11 @@ export default function Routing() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/details/:id" element={<Details />} />
-                <Route path="/create/" element={<AddEditBlog />} />
-                <Route path="/edit/:id" element={<AddEditBlog />} />
+                <Route path="/details" element={<Details />} />
+                <Route path="/create" element={<AddEditBlog />} />
+                <Route path="/edit" element={<AddEditBlog />} />
                 <Route path="/about" element ={<About />} />
+                <Route path="/forgetpassword" element ={<ForgetPassword />} />
                 <Route path="*" element ={<NoPage />} />
             </Routes>
         </BrowserRouter>

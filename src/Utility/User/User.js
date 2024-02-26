@@ -4,18 +4,20 @@ import { auth } from "../Firebase/firebase";
 import useStore from "../Zustand/Zustand";
 
 export default function User() {
-  const {setUser} = useStore();
+  const { setUser } = useStore();
+  const {setUserInfo} = useStore();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUser(true); 
+        setUser(true);
+        setUserInfo(user)
       } else {
         setUser(false);
+        setUserInfo(null)
       }
-    },[]) ;
+    });
 
-    return () => unsubscribe(); 
-  }, []); 
- 
+    return () => unsubscribe();
+  }, [setUser , setUserInfo]);
 };

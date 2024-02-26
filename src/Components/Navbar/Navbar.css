@@ -38,40 +38,59 @@
     color: goldenrod;
 }
 
-.navbar-main-responsive{
-    display: flex;
-    flex-direction: column;
-    float: right;
-    padding-right: 1rem;
-    border: 1px solid black;
-    padding: 2rem;
-    background-color: whitesmoke;
-}
-
-.navbar-main-link-responsive , .navbar-main-logo-responsive , .navbar-main-login-responsive{
-    display: flex;
-    flex-direction: column;
-}
-
-.navbar-main-link-responsive p, .navbar-main-logo-responsive h2, .navbar-main-login-responsive{
-    /* margin-left: 1rem; */
-    padding-bottom: 0.5rem;
-}
-
-.navbar-main-link-responsive p:hover {
-    background-color: goldenrod;
-    padding: 0.5rem;
-}
-
-.navbar-main-logo-responsive h2:hover{
-    color: goldenrod;
-}
 
 .navbar-main-icon{
     display: none;
 }
 
+.navbar-profile{
+    display: flex;
+    cursor: pointer;
+}
+
+.navbar-profile:hover{
+   color: goldenrod;
+}
+
+.profile-nav{
+    padding-top: 0.75rem;
+    margin-right: 0.5rem;
+}
+
+/* .navbar-main-responsive{
+    display: none;
+} */
+
 @media screen and (max-width : 800px) {
+    .navbar-main-responsive{
+        display: flex;
+        flex-direction: column;
+        float: right;
+        padding-right: 1rem;
+        border: 1px solid black;
+        padding: 2rem;
+        background-color: whitesmoke;
+    }
+    
+    .navbar-main-link-responsive , .navbar-main-logo-responsive , .navbar-main-login-responsive{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .navbar-main-link-responsive p, .navbar-main-logo-responsive h2, .navbar-main-login-responsive{
+        /* margin-left: 1rem; */
+        padding-bottom: 0.5rem;
+    }
+    
+    .navbar-main-link-responsive p:hover {
+        background-color: goldenrod;
+        padding: 0.5rem;
+    }
+    
+    .navbar-main-logo-responsive h2:hover{
+        color: goldenrod;
+    }
+    
     .navbar-main-icon{
         display: block;
     }
@@ -95,6 +114,10 @@
         position: fixed;
         top: 0;
         right: 0;
+    }
+
+    .navbar-profile{
+        padding-bottom: 0.5rem;
     }
     
 }

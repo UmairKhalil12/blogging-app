@@ -1,18 +1,40 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Navbar.css'
 import { IoMdMenu } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
 import Button from '../Button/Button';
-import useStore from '../../Utility/Zustand/Zustand'
+import useStore from '../../Utility/Zustand/Zustand';
+import { useNavigate } from 'react-router-dom';
+import { CgProfile } from "react-icons/cg";
 
 export default function Navbar() {
+    const navigate = useNavigate();
     const [toggleMenu, setToggleMenu] = useState(false)
     const { user } = useStore();
-    // console.log("Navbar user" , user) 
+    const { userInfo } = useStore();
+    console.log('userInfo nav',userInfo)
 
     const handleToggleMenu = () => {
         setToggleMenu(!toggleMenu)
     }
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 800) {
+                setToggleMenu(false);
+            } else {
+                setToggleMenu(true);
+            }
+        };
+
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     return (
         <div className={toggleMenu ? 'navbar' : ''}>
@@ -22,15 +44,19 @@ export default function Navbar() {
                 </div>
 
                 <div className={toggleMenu ? 'navbar-main-link-responsive' : 'navbar-main-link'}>
-                    <p>Home</p>
-                    <p>About</p>
-                    <p>Details</p>
+                    <p onClick={() => navigate('/home')} >Home</p>
+                    <p onClick={() => navigate('/about')} >About</p>
+                    <p onClick={() => navigate('/details')}>Details</p>
                 </div>
 
                 <div className={toggleMenu ? 'navbar-main-login-responsive' : 'navbar-main-login'}>
                     {user ?
                         (<>
-                            <Button text='Signout'  />
+                            <div className='navbar-profile'>
+                                <CgProfile size={30} className='profile-nav' />
+                                <p>{userInfo?.displayName}</p>
+                            </div>
+                            <Button text='Signout' />
                         </>
                         ) :
                         <>
