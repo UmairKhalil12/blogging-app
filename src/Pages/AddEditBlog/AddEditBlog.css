@@ -1,0 +1,47 @@
+.main-container-add-edit-blog{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-add-edit-blog{
+    width: 500px;  
+    border: 1px solid black;
+    text-align: center;  
+}
+
+.form-add-edit-blog div{
+    padding: 0.3rem;
+}
+
+.form-add-edit-blog select{
+    width:87%;
+    padding-left: 40px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+.trending-form{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+.trending-form input{
+    padding-bottom: 1.5rem;
+}
+
+.trending-form-yes-no{
+    display: flex;
+    justify-content: space-around;
+}
+
+.create-blog-form-choose-file-btn{
+    height: 40px;
+    height: auto;
+    padding: 0.5rem;
+}

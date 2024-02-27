@@ -13,16 +13,14 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Signup() {
   const navigate = useNavigate();
-  const { email, pass , name  ,userInfo} = useStore();
+  const { email, pass, name} = useStore();
 
   const handleSignup = (event) => {
     event.preventDefault();
     // console.log('Signup', email, pass, auth);
     createUserWithEmailAndPassword(auth, email, pass).then((userCredential) => {
       toast.success("User registered sucessfully")
-
-     userCredential.user.displayName = name;
-
+      userCredential.user.displayName = name;
       navigate('/home')
     })
       .catch((error) => {

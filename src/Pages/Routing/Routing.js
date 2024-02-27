@@ -18,7 +18,7 @@ export default function Routing() {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/details" element={<Details />} />
                 <Route path="/create" element={<AddEditBlog />} />
-                <Route path="/edit" element={<AddEditBlog />} />
+                <Route path="/addedit" element={<AddEditBlog />} />
                 <Route path="/about" element ={<About />} />
                 <Route path="/forgetpassword" element ={<ForgetPassword />} />
                 <Route path="*" element ={<NoPage />} />

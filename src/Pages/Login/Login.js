@@ -11,19 +11,25 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Login() {
-  const { email, pass } = useStore();
+  const { name, email, pass, user, userInfo } = useStore();
+  console.log('login name', name)
+  console.log('login user', user)
   const navigate = useNavigate();
+
 
   const handleLogin = (event) => {
     event.preventDefault();
     signInWithEmailAndPassword(auth, email, pass).then((userCredential) => {
       toast.success("Logged in Successfully")
+      userCredential.user.displayName = name;
+      userInfo.displayName = name;
       navigate('/home')
     })
       .catch((error) => {
-        toast.error("Error logging in")
+        toast.error("Error logging in", error.message)
         console.log("Error logging in ", error)
         console.log("Error logging in ,error message ", error.message)
+        console.log("Error logging in ,error message ", error.code)
       })
 
   }
@@ -40,10 +46,10 @@ export default function Login() {
 
           <Button text='Login' />
 
-          <p className='form-link-p' onClick={()=>navigate('/forgetpassword')}>Forget Password?</p>
+          <p className='form-link-p' onClick={() => navigate('/forgetpassword')}>Forget Password?</p>
 
           <p className='form-link-p' onClick={() => navigate('/signup')}>Don't have an Account? Signup</p>
-          
+
 
         </form>
       </div>
