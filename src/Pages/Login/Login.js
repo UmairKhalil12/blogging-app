@@ -13,16 +13,16 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Login() {
   const { name, email, pass, user, userInfo } = useStore();
   console.log('login name', name)
-  console.log('login user', user)
+  // console.log('login user', user)
   const navigate = useNavigate();
 
-
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
-    signInWithEmailAndPassword(auth, email, pass).then((userCredential) => {
+    await signInWithEmailAndPassword(auth, email, pass).then((userCredential) => {
       toast.success("Logged in Successfully")
       userCredential.user.displayName = name;
       userInfo.displayName = name;
+      console.log('insideSignInWithEmailandPassword', userInfo.displayName)
       navigate('/home')
     })
       .catch((error) => {

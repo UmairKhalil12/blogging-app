@@ -4,12 +4,14 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    width: 100%;
 }
 
 .form-add-edit-blog{
     width: 500px;  
     border: 1px solid black;
     text-align: center;  
+    box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.5);
 }
 
 .form-add-edit-blog div{
@@ -17,31 +19,57 @@
 }
 
 .form-add-edit-blog select{
-    width:87%;
+    width:88%;
     padding-left: 40px;
-    height: 30px;
+    height: 33px;
     border-radius: 5px;
     border: 1px solid grey;
+   
 }
 
 .trending-form{
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
     text-align: center;
 }
 
-.trending-form input{
-    padding-bottom: 1.5rem;
-}
+/* .trending-form input{
+    margin-bottom: 2rem;
+} */
 
+.trending-form-yes-no input{
+    margin-left: 0.5rem;
+}
+ 
 .trending-form-yes-no{
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
 .create-blog-form-choose-file-btn{
     height: 40px;
     height: auto;
     padding: 0.5rem;
+}
+
+.trending-form-file-div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 1rem;
+    /* border: 0.5px solid gray; */
+    /* box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5); */
+}
+
+.add-edit-blog-form-description{
+    width: 80%;
+    margin-top: 1rem;
+    padding-left: 40px;
+}
+
+.trending-form-file-div input{
+    border: none;
 }

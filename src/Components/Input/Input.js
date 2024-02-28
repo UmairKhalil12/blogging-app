@@ -6,12 +6,12 @@ import { MdOutlineVisibility } from "react-icons/md";
 import { MdOutlineVisibilityOff } from "react-icons/md";
 import { useState } from 'react';
 
-export default function Input({ type, placeholder, id, name, value, checked }) {
+export default function Input({ type, placeholder, id, name, value, checked, Inputname }) {
 
   const [togglePassword, setTogglePassword] = useState(false);
   const [inputType, setInputType] = useState(type);
 
-  const { setEmail, setPass, setName, setSelectedOption , selectedOption} = useStore();
+  const { setEmail, setPass, setName, setSelectedOption, selectedOption } = useStore();
 
   const handleOptionChange = (event) => {
     const value = event.target.value;

@@ -6,7 +6,7 @@ const useStore = create((set) => ({
   name: '',
   user: null,
   userInfo: null,
-  selectedOption: null,
+  selectedOption: 'yes',
   setEmail: (value) => set({ email: value }),
   setPass: (value) => set({ pass: value }),
   setName: (value) => set({ name: value }),
