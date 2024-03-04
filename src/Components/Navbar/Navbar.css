@@ -119,7 +119,12 @@
     .navbar-profile{
         padding-bottom: 0.5rem;
     }
-    
+}
+
+@media screen and (max-width : 550px){
+    .navbar-main-responsive{
+        padding: 0;
+    }
 }
 
 

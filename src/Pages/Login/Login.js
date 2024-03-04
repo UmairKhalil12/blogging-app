@@ -8,21 +8,35 @@ import useStore from '../../Utility/Zustand/Zustand'
 import { auth } from '../../Utility/Firebase/firebase'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { useState } from 'react'
 
 
 export default function Login() {
-  const { name, email, pass, user, userInfo } = useStore();
+  const { name, user, userInfo } = useStore();
+
+  // const [name , setName] = useState();
+  const [email, setEmail] = useState();
+  const [pass, setPass] = useState();
+
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
+  }
+
+  const handlePass = (event) => {
+    setPass(event.target.value);
+  }
+
+
   console.log('login name', name)
-  // console.log('login user', user)
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
     await signInWithEmailAndPassword(auth, email, pass).then((userCredential) => {
       toast.success("Logged in Successfully")
-      userCredential.user.displayName = name;
-      userInfo.displayName = name;
-      console.log('insideSignInWithEmailandPassword', userInfo.displayName)
+      // userCredential.user.displayName = name;
+      // userInfo.displayName = name;
+      // console.log('insideSignInWithEmailandPassword', userInfo.displayName)
       navigate('/home')
     })
       .catch((error) => {
@@ -39,10 +53,10 @@ export default function Login() {
       <div className='form-main'>
         <form className='form-main-div' onSubmit={handleLogin}>
           <Label text='Enter your Email' />
-          <Input type='email' />
+          <Input type='email' onChange={handleEmail} />
 
           <Label text='Enter your password' />
-          <Input type='password' />
+          <Input type='password' onChange={handlePass} />
 
           <Button text='Login' />
 

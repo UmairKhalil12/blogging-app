@@ -5,6 +5,7 @@
     font-size: large;
     margin-left: 1rem;
     border: none;
+    cursor: pointer;
 }
 
 .navbar-btn:hover{

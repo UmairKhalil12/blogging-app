@@ -5,7 +5,7 @@ import { auth } from '../../Utility/Firebase/firebase'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function Button({ text, type }) {
+export default function Button({ text, type  , disable}) {
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -30,7 +30,7 @@ export default function Button({ text, type }) {
     }
     return (
         <>
-            <button className='navbar-btn' type={type} onClick={handleClick} >{text}</button>
+            <button className='navbar-btn' type={type} onClick={handleClick} disabled = {disable}  >{text}</button>
             <ToastContainer />
         </>
     )

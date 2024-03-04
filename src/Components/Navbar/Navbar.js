@@ -15,7 +15,7 @@ export default function Navbar() {
     const {name} = useStore();
     
     // console.log('userInfo nav',userInfo)
-    console.log('name navbr' , name);
+    // console.log('name navbr' , name);
 
     const handleToggleMenu = () => {
         setToggleMenu(!toggleMenu)
