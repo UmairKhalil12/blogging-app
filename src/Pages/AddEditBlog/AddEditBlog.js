@@ -4,19 +4,22 @@ import Label from "../../Components/Label/Label"
 import "./AddEditBlog.css"
 import React, { useEffect } from 'react'
 import { useState } from "react"
-import Navbar from "../../Components/Navbar/Navbar"
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
-import { storage } from "../../Utility/Firebase/firebase"
+import { db, storage } from "../../Utility/Firebase/firebase"
 import { TagsInput } from "react-tag-input-component";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore"
+import useStore from "../../Utility/Zustand/Zustand"
+import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom"
 
 const initialState = {
     title: "",
     tags: [],
     trending: 'no',
-    category: 'Please select the category',
+    category: 'fashion',
     description: '',
-    likes: [],
-    comments: []
+    // likes: [],
+    // comments: []
 
 }
 
@@ -30,19 +33,23 @@ const categoryOption = [
 ]
 
 export default function AddEditBlog() {
-    // const [selectedOption, setSelectedOption] = useState();
+    const navigate = useNavigate();
     const [form, setForm] = useState(initialState);
     const [file, setFile] = useState();
     const [textDescription] = useState();
     const [text] = useState();
-    
+
+    const { userInfo } = useStore();
+    console.log('user', userInfo)
+
     const { title, tags, category, trending, description } = form
+    console.log('form ', title, tags, category, trending, description);
     const [progress, setProgress] = useState(null);
 
     useEffect(() => {
         const uploadFile = () => {
             const storageRef = ref(storage, file.name)
-            const uploadTask = uploadBytesResumable(storageRef)
+            const uploadTask = uploadBytesResumable(storageRef, file)
 
             uploadTask.on("state_changed", (snapshot) => {
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
@@ -57,16 +64,16 @@ export default function AddEditBlog() {
                     default:
                         break
                 }
-
             },
                 (error) => {
                     console.log(error);
                     console.log(error.message)
                 },
 
-                () => {
-                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                        setForm((prev) => ({ ...prev, imgUrl: downloadURL }))
+                async () => {
+                    await getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
+                        toast.info("Image uploaded to firebase sucessfully")
+                        setForm((prev) => ({ ...prev, imgUrl: downloadUrl }))
                     })
                 }
 
@@ -78,7 +85,7 @@ export default function AddEditBlog() {
 
 
     const handleText = (event) => {
-        setForm({ ...form, title : event.target.value})
+        setForm({ ...form, title: event.target.value })
     };
 
     const handleDescription = (event) => {
@@ -95,15 +102,37 @@ export default function AddEditBlog() {
 
     const handleTags = (tags) => {
         setForm({ ...form, tags });
-      };
+    };
 
     console.log(form)
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        if (category && tags && title && description && trending && file) {
+            try {
+                await addDoc(collection(db, 'blogs'), {
+                    ...form,
+                    timestamp: serverTimestamp(),
+                    userId: userInfo.uid
+                })
+                toast.success("Blog added sucessfully");
+                navigate('/home')
+            } catch (error) {
+                toast.error('Error uploading blog');
+                console.log("error uploading blog ", error)
+                console.log("error uploading blog ", error.message)
+            }
+
+        }
+        else {
+            toast.error('All fields are required')
+        }
+    }
+
     return (
         <div>
-            <Navbar />
             <div className="main-container-add-edit-blog">
-                <form className="form-add-edit-blog">
+                <form className="form-add-edit-blog" onSubmit={handleSubmit}>
                     <h1>Create Blog</h1>
                     <Input
                         placeholder='Enter Text'
@@ -114,7 +143,7 @@ export default function AddEditBlog() {
                     <div className="form-add-edit-blog-input-tag">
                         <TagsInput
                             value={tags}
-                            placeholder="Tags"
+                            placeHolder="Tags"
                             onChange={handleTags}
                         />
                     </div>

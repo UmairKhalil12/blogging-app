@@ -1,19 +1,25 @@
-.navbar{
+.navbar {
     padding: 2rem 2rem;
     background-color: whitesmoke;
+    
 }
 
 
-.navbar-main{
+.navbar-main {
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     align-items: center;
     padding: 0.5rem 2rem;
     background-color: whitesmoke;
+
 }
 
-.navbar-main-link , .navbar-main-logo , .navbar-main-login{
+.navbar-main-link,
+.navbar-main-logo,
+.navbar-main-login {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -23,46 +29,60 @@
     background-color: goldenrod;
 }
 
-.navbar-main-link p , .navbar-main-logo h2{
+.navbar-main-link p,
+.navbar-main-logo h2 {
     padding: 5px 12px;
     margin: 2px 4px;
     cursor: pointer;
 }
 
-.navbar-main-logo h2{
+.navbar-main-logo h2 {
     margin-right: 8rem;
     margin-left: 1rem;
 }
 
-.navbar-main-logo h2:hover{
+.navbar-main-logo h2:hover {
     color: goldenrod;
 }
 
 
-.navbar-main-icon{
+.navbar-main-icon {
     display: none;
 }
 
-.navbar-profile{
+.navbar-profile {
     display: flex;
     cursor: pointer;
 }
 
-.navbar-profile:hover{
-   color: goldenrod;
+.navbar-profile:hover {
+    color: goldenrod;
 }
 
-.profile-nav{
+.profile-nav {
     padding-top: 0.75rem;
     margin-right: 0.5rem;
 }
 
-/* .navbar-main-responsive{
-    display: none;
-} */
+.navbar-main-login button {
+    width: 70%;
+}
+
+.navbar-main-login-responsive button {
+    width: 70%;
+}
+
+.nav-signup-login-btn{
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-signup-login-btn button{
+    margin-left: 0.5rem;
+}
 
 @media screen and (max-width : 800px) {
-    .navbar-main-responsive{
+    .navbar-main-responsive {
         display: flex;
         flex-direction: column;
         float: right;
@@ -71,31 +91,35 @@
         padding: 2rem;
         background-color: whitesmoke;
     }
-    
-    .navbar-main-link-responsive , .navbar-main-logo-responsive , .navbar-main-login-responsive{
+
+    .navbar-main-link-responsive,
+    .navbar-main-logo-responsive,
+    .navbar-main-login-responsive {
         display: flex;
         flex-direction: column;
     }
-    
-    .navbar-main-link-responsive p, .navbar-main-logo-responsive h2, .navbar-main-login-responsive{
+
+    .navbar-main-link-responsive p,
+    .navbar-main-logo-responsive h2,
+    .navbar-main-login-responsive {
         /* margin-left: 1rem; */
         padding-bottom: 0.5rem;
     }
-    
+
     .navbar-main-link-responsive p:hover {
         background-color: goldenrod;
         padding: 0.5rem;
     }
-    
-    .navbar-main-logo-responsive h2:hover{
+
+    .navbar-main-logo-responsive h2:hover {
         color: goldenrod;
     }
-    
-    .navbar-main-icon{
+
+    .navbar-main-icon {
         display: block;
     }
 
-    .nav-icon{
+    .nav-icon {
         position: fixed;
         top: 0;
         right: 0;
@@ -106,25 +130,24 @@
         padding-bottom: 1rem; */
     }
 
-    .navbar-main-link , .navbar-main-login{
+    .navbar-main-link,
+    .navbar-main-login {
         display: none;
     }
 
-    .navbar-main-responsive{
+    .navbar-main-responsive {
         position: fixed;
         top: 0;
         right: 0;
     }
 
-    .navbar-profile{
+    .navbar-profile {
         padding-bottom: 0.5rem;
     }
 }
 
-@media screen and (max-width : 550px){
-    .navbar-main-responsive{
+@media screen and (max-width : 550px) {
+    .navbar-main-responsive {
         padding: 0;
     }
 }
-
-

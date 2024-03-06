@@ -8,6 +8,7 @@ import { auth } from '../../Utility/Firebase/firebase'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom'
+import Heading from '../../Components/Heading/Heading'
 
 export default function ForgetPassword() {
     const navigate = useNavigate();
@@ -30,6 +31,7 @@ export default function ForgetPassword() {
     return (
         <div className='main-forget-pass-form'>
             <form className='forget-pass-form' onSubmit={handlePasswordResetHandler}>
+                <Heading text='Forget Password' />
                 <Label text='Enter your email' />
                 <Input type='email' onChange={handleEmail} value={email} />
                 <Button text='Send reset link' type='submit' />

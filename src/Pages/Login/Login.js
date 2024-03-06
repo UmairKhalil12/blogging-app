@@ -9,10 +9,11 @@ import { auth } from '../../Utility/Firebase/firebase'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react'
+import Heading from '../../Components/Heading/Heading'
 
 
 export default function Login() {
-  const { name, user, userInfo } = useStore();
+  const { name} = useStore();
 
   // const [name , setName] = useState();
   const [email, setEmail] = useState();
@@ -52,11 +53,12 @@ export default function Login() {
     <>
       <div className='form-main'>
         <form className='form-main-div' onSubmit={handleLogin}>
+          <Heading text='Log-in' />
           <Label text='Enter your Email' />
-          <Input type='email' onChange={handleEmail} />
+          <Input type='email' onChange={handleEmail} placeholder='Email' />
 
           <Label text='Enter your password' />
-          <Input type='password' onChange={handlePass} />
+          <Input type='password' onChange={handlePass} placeholder='Password' />
 
           <Button text='Login' />
 

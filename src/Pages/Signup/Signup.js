@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Signup.css'
 import Label from '../../Components/Label/Label'
 import Input from '../../Components/Input/Input'
@@ -9,12 +9,27 @@ import { auth } from '../../Utility/Firebase/firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import Heading from '../../Components/Heading/Heading'
 
 
 export default function Signup() {
   const navigate = useNavigate();
-  const { email, pass, name} = useStore();
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [pass, setPass] = useState();
 
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const handlePass = (e) => {
+    setPass(e.target.value);
+  }
+
+  const handleName = (e) => {
+    setName(e.target.value);
+  }
   const handleSignup = (event) => {
     event.preventDefault();
     // console.log('Signup', email, pass, auth);
@@ -31,18 +46,21 @@ export default function Signup() {
       })
   }
 
+
+
   return (
     <>
       <div className='main-signup'>
         <form className='form-main-div' onSubmit={handleSignup}>
+          <Heading text='Sign-up' />
           <Label text='Enter your full name ' />
-          <Input type='text' />
+          <Input type='text' onChange={handleName} />
 
           <Label text='Enter your email' />
-          <Input type='email' />
+          <Input type='email' onChange={handleEmail} />
 
           <Label text='Enter your password' />
-          <Input type='password' />
+          <Input type='password' onChange={handlePass} />
 
           <Button text='Signup' type='submit' />
 

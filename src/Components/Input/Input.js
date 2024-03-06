@@ -1,45 +1,18 @@
 import './Input.css'
-import useStore from '../../Utility/Zustand/Zustand';
+// import useStore from '../../Utility/Zustand/Zustand';
 import { MdOutlinePassword } from "react-icons/md";
 import { MdOutlineEmail } from "react-icons/md";
 import { MdOutlineVisibility } from "react-icons/md";
 import { MdOutlineVisibilityOff } from "react-icons/md";
 import { useState } from 'react';
 
-export default function Input({ type, placeholder, id, name, value, checked, onChange }) {
+export default function Input({ type, placeholder, id, name, value, checked, onChange , inputStyle }) {
 
   const [togglePassword, setTogglePassword] = useState(false);
   const [inputType, setInputType] = useState(type);
 
-  const { setEmail, setPass, setName, setSelectedOption, setText, setFile, tag, setTag, form, setForm } = useStore();
+  //const { setEmail, setPass, setName, setSelectedOption, setText, setFile, tag, setTag, form, setForm } = useStore();
 
-  // const handleChange = (event) => {
-  //   if (type === 'email') {
-  //     setEmail(event.target.value);
-  //   }
-  //   else if (type === 'password') {
-  //     setPass(event.target.value);
-  //   }
-  //   else if (type === 'radio') {
-  //     setForm({ ...form, trending: event.target.value });
-  //   }
-
-  //   else if (placeholder === 'Enter Text'){ 
-  //     setForm({...form , [event.target.name]: event.target.value })
-  //   }
-
-    // else if(placeholder === 'Tags'){
-    //   setForm({ ...form, tag });
-    // }
-
-  //   else if (type === 'text') {
-  //     setName(event.target.value);
-  //   }
-
-  //   else if (type === 'file'){
-  //     setFile(event.target.files[0])
-  //   }
-  // }
 
   const handleImage = () => {
     if (type === 'email') {
