@@ -1,14 +1,14 @@
 import React from 'react'
 import './HomePage.css'
-// import Header from '../../Components/Header/Header'
 import useStore from '../../Utility/Zustand/Zustand'
-// import BlogSection from '../../Components/BlogSection/BlogSection';
 import { useState, useEffect } from 'react';
 import { onSnapshot } from 'firebase/firestore';
 import { collection } from 'firebase/firestore';
 import { db } from '../../Utility/Firebase/firebase';
 import { toast } from 'react-toastify';
 import BlogSection from '../../Components/BlogSection/BlogSection';
+import Heading from '../../Components/Heading/Heading';
+import Spinner from '../../Components/Spinner/Spinner';
 
 
 export default function HomePage() {
@@ -28,10 +28,12 @@ export default function HomePage() {
           list.push({ id: doc.id, ...doc.data() })
         })
         setBlogs(list)
+        setLoading(false)
       }, (error) => {
         toast.error('Error fetching blogs')
         console.log("Error fetching blogs", error)
         console.log("Error fetching blogs", error.message)
+        setLoading(false)
 
       }
     )
@@ -44,25 +46,22 @@ export default function HomePage() {
 
   console.log('homepage blogs', blogs);
 
+  if (loading) {
+    return <Spinner />
+  }
+
   return (
     <div className='main-home'>
-      <div>
-        <div className='home-trending'>
-          <h2>Trending</h2>
+      <Heading text='Trending' />
+      <div className='main-home-blogs'>
+        <div className='home-blog-blogsection'>
           <BlogSection blogs={blogs} />
-          <div className='home-trending-blog-tag-popular'>
-            <div className='home-treding-blog'>
-              <h2>Blog section</h2>
-            </div>
-
-            <div className='home-treding-tag-popular'>
-              <h2>Tags</h2>
-              <h2>Most popular</h2>
-            </div>
-
-          </div>
         </div>
 
+        <div>
+          <h3>Tags</h3>
+          <h3>Most Popular</h3>
+        </div>
 
       </div>
     </div>

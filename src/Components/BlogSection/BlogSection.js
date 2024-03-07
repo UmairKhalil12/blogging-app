@@ -1,47 +1,79 @@
+import { toast } from 'react-toastify'
 import { excerpt } from '../../Utility/excerpt'
 import BlogButton from '../BlogButton/BlogButton'
-import Button from '../Button/Button'
-import Heading from '../Heading/Heading'
 import './BlogSection.css'
-import React from 'react'
+import React, { useState } from 'react'
+import { FaRegEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { Link } from 'react-router-dom'
+import { deleteDoc, doc } from 'firebase/firestore'
+import { db } from '../../Utility/Firebase/firebase'
+import useStore from '../../Utility/Zustand/Zustand'
+
 
 export default function BlogSection({ blogs }) {
-    const url = blogs.map((blog) => {
-        return blog.imgUrl
-    })
-    console.log('blogs img url', url)
+    const [loading, setLoading] = useState(true);
+
+    const { userInfo, user } = useStore();
+
+    const handleBlogDelete = async (id) => {
+        if (window.confirm("Are you sure you want to delete the blog?"))
+            try {
+                setLoading(true)
+                await deleteDoc(doc(db, 'blogs', id));
+                setLoading(false)
+            }
+            catch (error) {
+                toast.error('Error deleting blog')
+                console.log('error deleting blog', error)
+            }
+    }
+
+    const userId = userInfo?.uid;
+
+    // console.log('blogsection', blogs)
     return (
+
         <div className='blogsection-main' >
-            <Heading text='Daily Blogs' />
+            <h3>Daily Blogs</h3>
+            <hr></hr>
             {
                 blogs?.map((item, index) => {
                     return (
                         <div className='blogsection-map' key={item.id}>
                             <div>
-                                <img src={item.imgUrl} alt={item.title} />
+                                <img src={item.imgUrl} alt={item.title} className='blogsection-img' />
                             </div>
 
                             <div>
-                                <p>{item.category}</p>
+                                <p className='blogsection-category'>{item.category}</p>
                                 <div className='title-timestamp'>
-                                    <p>{item.title}</p>
-                                    <p>{item.timestamp.toDate().toDateString()}</p>
+                                    <p className='blogsection-title'>{item.title}</p>
+                                    <p className='blogsection-date'>{item.timestamp.toDate().toDateString()}</p>
                                 </div>
 
-                                <p>{excerpt(item.description, 120)}</p>
+                                <p className='blogsection-description'>{excerpt(item.description, 120)}</p>
 
                                 <div className='blog-readmore-edit-btn'>
                                     <div>
-                                        <BlogButton text='Read More' />
+                                        {console.log('link detail id', item.id)}
+                                        <Link to={`/detail/${item.id}`} >
+                                            <BlogButton text='Read More' />
+                                        </Link>
+
                                     </div>
                                     <div className='blog-edit-delete'>
-                                        <BlogButton text='Edit' />
-                                        <BlogButton text='Delete' />
+                                        {user && userId === item?.userId ?
+                                            <>
+                                                <Link to={`/update/${item.id}`}><button><FaRegEdit size={30} /></button></Link>
+                                                <button onClick={() => handleBlogDelete(item.id)} ><MdDelete size={30} /></button>
+                                            </>
+                                            : null}
+
                                     </div>
                                 </div>
 
                             </div>
-
                         </div>
                     )
 

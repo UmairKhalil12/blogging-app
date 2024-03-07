@@ -1,0 +1,19 @@
+.detail-blog-title-date{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    text-align: center;
+    /* background-repeat: no-repeat; */
+    background-position: center;
+}
+
+.detail-blog{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.detail-blog-description{
+    width: 50%;
+}
+

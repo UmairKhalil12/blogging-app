@@ -1,16 +1,18 @@
 import Button from "../../Components/Button/Button"
 import Input from "../../Components/Input/Input"
 import Label from "../../Components/Label/Label"
+import Heading from "../../Components/Heading/Heading"
 import "./AddEditBlog.css"
 import React, { useEffect } from 'react'
 import { useState } from "react"
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { db, storage } from "../../Utility/Firebase/firebase"
 import { TagsInput } from "react-tag-input-component";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore"
+import { addDoc, collection, doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore"
 import useStore from "../../Utility/Zustand/Zustand"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 const initialState = {
     title: "",
@@ -40,10 +42,9 @@ export default function AddEditBlog() {
     const [text] = useState();
 
     const { userInfo } = useStore();
-    console.log('user', userInfo)
 
     const { title, tags, category, trending, description } = form
-    console.log('form ', title, tags, category, trending, description);
+
     const [progress, setProgress] = useState(null);
 
     useEffect(() => {
@@ -109,34 +110,76 @@ export default function AddEditBlog() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (category && tags && title && description && trending && file) {
-            try {
-                await addDoc(collection(db, 'blogs'), {
-                    ...form,
-                    timestamp: serverTimestamp(),
-                    userId: userInfo.uid
-                })
-                toast.success("Blog added sucessfully");
-                navigate('/home')
-            } catch (error) {
-                toast.error('Error uploading blog');
-                console.log("error uploading blog ", error)
-                console.log("error uploading blog ", error.message)
+            if (!id) {
+                try {
+                    await addDoc(collection(db, 'blogs'), {
+                        ...form,
+                        timestamp: serverTimestamp(),
+                        userId: userInfo.uid
+                    })
+                    toast.success("Blog added sucessfully");
+                    navigate('/home')
+                } catch (error) {
+                    toast.error('Error uploading blog');
+                    console.log("error uploading blog ", error)
+                    console.log("error uploading blog ", error.message)
+                }
+            }
+            else {
+                try {
+                    await updateDoc(doc(db, 'blogs', id), {
+                        ...form,
+                        timestamp: serverTimestamp(),
+                        userId: userInfo.uid
+                    })
+                    toast.success("Blog added sucessfully");
+                    navigate('/home')
+                } catch (error) {
+                    toast.error('Error uploading blog');
+                    console.log("error uploading blog ", error)
+                    console.log("error uploading blog ", error.message)
+                }
+
             }
 
         }
+
         else {
             toast.error('All fields are required')
         }
     }
 
+    const { id } = useParams();
+
+    const getBlogDetail = async () => {
+        try {
+            const docRef = doc(db, 'blogs', id)
+            const snapshot = await getDoc(docRef);
+            if (snapshot.exists()) {
+                setForm((prev) => ({
+                    ...prev,
+                    ...snapshot.data(),
+                }));
+            }
+        }
+        catch (error) {
+            console.log('error getting updating blog data');
+        }
+    }
+    useEffect(() => {
+        if (id) {
+            getBlogDetail();
+        }
+    }, [id])
+
     return (
         <div>
             <div className="main-container-add-edit-blog">
                 <form className="form-add-edit-blog" onSubmit={handleSubmit}>
-                    <h1>Create Blog</h1>
+                    {id ? <Heading text='Update Blog' /> : <Heading text='Create Blog' />}
                     <Input
-                        placeholder='Enter Text'
-                        value={text}
+                        placeholder='Enter Title'
+                        value={title}
                         onChange={handleText}
                     />
 
@@ -157,6 +200,7 @@ export default function AddEditBlog() {
                                 type='radio'
                                 id='yes'
                                 value='yes'
+                                checked={trending === "yes"}
                                 name='trendingOptions'
                                 onChange={handleTrending}
                             />
@@ -171,6 +215,7 @@ export default function AddEditBlog() {
                                 value='no'
                                 name='trendingOptions'
                                 onChange={handleTrending}
+                                checked={trending === "no"}
                             />
 
                             <Label text='No' />
@@ -189,7 +234,7 @@ export default function AddEditBlog() {
                         rows='5'
                         className="add-edit-blog-form-description-textarea"
                         placeholder="Enter description"
-                        value={textDescription}
+                        value={description}
                         onChange={handleDescription}
                     >
 
@@ -201,7 +246,9 @@ export default function AddEditBlog() {
                             onChange={(event) => setFile(event.target.files[0])} />
                     </div>
 
-                    <Button text='Submit' disable={progress != null && progress < 100} />
+                    {id ? <Button text='Update' disable={progress != null && progress < 100} />
+                        : <Button text='Submit' disable={progress != null && progress < 100} />}
+
                 </form>
             </div>
 

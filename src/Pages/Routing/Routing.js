@@ -1,4 +1,4 @@
-import {Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Details from '../Details/Details'
 import HomePage from "../HomePage/HomePage";
 import Login from '../Login/Login'
@@ -11,20 +11,21 @@ import useStore from "../../Utility/Zustand/Zustand";
 
 
 export default function Routing() {
-    const {user} = useStore();
-    console.log('routing' , user)
+    const { user } = useStore();
+    console.log('routing', user)
     return (
-            <Routes>
-                <Route path="/" element={<Login />} />
-                { user ? null : <Route path="/login" element={<Login />} />}
-                <Route path="/home" element={<HomePage />} />
-                {user ? null : <Route path="/signup" element={<Signup />} />}
-                <Route path="/details" element={<Details />} />
-                {user ?<Route path="/create" element={<AddEditBlog />}  /> : null}
-                { user ? <Route path="/addedit" element={<AddEditBlog />} /> : null}
-                <Route path="/about" element ={<About />} />
-                {user ? null : <Route path="/forgetpassword" element ={<ForgetPassword />} />}
-                <Route path="*" element ={<NoPage />} />
-            </Routes>
+        <Routes>
+            {user ? <Route path="/" element={<HomePage />} /> : <Route path="/" element={<Login />} />}
+            {user ? null : <Route path="/login" element={<Login />} />}
+            <Route path="/home" element={<HomePage />} />
+            {user ? null : <Route path="/signup" element={<Signup />} />}
+            <Route path="/detail/:id" element={<Details />} />
+            {user ? <Route path="/update/:id" element={<AddEditBlog />} /> : null}
+            {user ? <Route path="/create" element={<AddEditBlog />} /> : null}
+            {user ? <Route path="/addedit" element={<AddEditBlog />} /> : null}
+            <Route path="/about" element={<About />} />
+            {user ? null : <Route path="/forgetpassword" element={<ForgetPassword />} />}
+            <Route path="*" element={<NoPage />} />
+        </Routes>
     )
 }

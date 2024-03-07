@@ -50,7 +50,6 @@ export default function Navbar() {
                     <div className={toggleMenu ? 'navbar-main-link-responsive' : 'navbar-main-link'}>
                         <p onClick={() => navigate('/home')} >Home</p>
                         <p onClick={() => navigate('/about')} >About</p>
-                        <p onClick={() => navigate('/details')}>Details</p>
                         {user ? <p onClick={() => navigate('/addedit')}>Add Blog</p> : ''}
                     </div>
 

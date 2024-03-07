@@ -1,9 +1,14 @@
+.blogsection-main{
+    text-align: left;
+}
+
+
 .blog-btn{
     border-radius: 5px;
     border: none;
     widows: 30%;
     height: 35px;
-    background-color: gold;
+    background-color: lightgray;
     cursor: pointer;
 }
 
@@ -22,3 +27,55 @@
     display: flex;
     justify-content: space-evenly;
 }
+
+.blog-edit-delete button{
+    margin-left: 0.5rem;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+}
+
+.blog-edit-delete button:hover{
+    color: red;
+}
+
+.blogsection-category{
+    background-color: #447bc0;
+    color: white;
+    width: min-content;
+    padding: 0.1rem;
+    border-radius: 3px;
+}
+
+.title-timestamp{
+    display: flex;
+    justify-content: space-evenly;
+    width: max-content;
+}
+
+.blogsection-title{
+    font-weight: bold;
+}
+
+.blogsection-date{
+    margin-left: 0.3rem;
+}
+
+.blogsection-description{
+    text-align: center;
+}
+
+.blogsection-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 250px;
+    margin-right: 1rem;
+    margin-top: 1.5rem;
+}
+
+.blogsection-map{
+    margin-bottom: 1rem;
+}
+

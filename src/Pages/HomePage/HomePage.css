@@ -1,14 +1,13 @@
-/* .main-home{
-    height: 130vh;
-} */
-
-.home-trending{
-    padding: 1rem;
+.main-home{
     text-align: center;
 }
 
-
-.home-trending-blog-tag-popular{
+.main-home-blogs{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+}
+
+
+.home-blog-blogsection{
+    width: 60%;
 }
