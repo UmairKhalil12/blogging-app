@@ -43,7 +43,7 @@ export default function Details() {
     <div className='main-blog-detail' >
       <div className='detail-blog-title-date' style={{ backgroundImage: `url('${blog?.imgUrl}')` }}>
         <div>
-          <p>{blog?.timestamp.toDate().toDateString()}</p>
+          <p className='detail-banner-date'>{blog?.timestamp.toDate().toDateString()}</p>
           <Heading text={blog?.title} />
         </div>
 
@@ -51,7 +51,11 @@ export default function Details() {
 
       <div className='detail-blog'>
         <div className='detail-blog-description'>
-          <p>{blog?.timestamp.toDate().toDateString()}</p>
+          <div className='detail-blog-author-date'>
+            <p className='detail-blog-author' >{blog?.author}</p>
+            <p className='detail-blog-date'>{blog?.timestamp.toDate().toDateString()}</p>
+          </div>
+
           <hr />
           <p>{blog?.description}</p>
 

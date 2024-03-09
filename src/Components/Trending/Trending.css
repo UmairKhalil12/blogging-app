@@ -1,0 +1,28 @@
+.trending-main{
+    margin: 1rem;   
+}
+
+.trending-blogs-div{
+    height: 225px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.trending-blogs-div a {
+    color: white !important;
+    text-decoration: none !important;
+    font-weight: bolder;
+}
+
+.trending-blog-div-author-date{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.trending-blog-content-date{
+    margin-left: 0.5rem;
+}
+

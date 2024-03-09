@@ -38,10 +38,12 @@ export default function AddEditBlog() {
     const navigate = useNavigate();
     const [form, setForm] = useState(initialState);
     const [file, setFile] = useState();
-    const [textDescription] = useState();
-    const [text] = useState();
+    // const [textDescription] = useState();
+    // const [text] = useState();
 
     const { userInfo } = useStore();
+    console.log('add edit userinfo',userInfo)
+
 
     const { title, tags, category, trending, description } = form
 
@@ -105,7 +107,7 @@ export default function AddEditBlog() {
         setForm({ ...form, tags });
     };
 
-    console.log(form)
+    // console.log(form)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -115,7 +117,8 @@ export default function AddEditBlog() {
                     await addDoc(collection(db, 'blogs'), {
                         ...form,
                         timestamp: serverTimestamp(),
-                        userId: userInfo.uid
+                        userId: userInfo.uid,
+                        author: userInfo.displayName,
                     })
                     toast.success("Blog added sucessfully");
                     navigate('/home')
@@ -132,7 +135,7 @@ export default function AddEditBlog() {
                         timestamp: serverTimestamp(),
                         userId: userInfo.uid
                     })
-                    toast.success("Blog added sucessfully");
+                    toast.success("Blog updated sucessfully");
                     navigate('/home')
                 } catch (error) {
                     toast.error('Error uploading blog');
@@ -143,7 +146,6 @@ export default function AddEditBlog() {
             }
 
         }
-
         else {
             toast.error('All fields are required')
         }
@@ -171,6 +173,7 @@ export default function AddEditBlog() {
             getBlogDetail();
         }
     }, [id])
+
 
     return (
         <div>

@@ -28,7 +28,7 @@ export default function Login() {
   }
 
 
-  console.log('login name', name)
+  // console.log('login name', name)
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {

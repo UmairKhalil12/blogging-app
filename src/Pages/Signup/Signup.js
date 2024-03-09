@@ -4,9 +4,9 @@ import Label from '../../Components/Label/Label'
 import Input from '../../Components/Input/Input'
 import Button from '../../Components/Button/Button'
 import { useNavigate } from 'react-router-dom'
-import useStore from '../../Utility/Zustand/Zustand'
+//import useStore from '../../Utility/Zustand/Zustand'
 import { auth } from '../../Utility/Firebase/firebase'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Heading from '../../Components/Heading/Heading'
@@ -30,20 +30,26 @@ export default function Signup() {
   const handleName = (e) => {
     setName(e.target.value);
   }
-  const handleSignup = (event) => {
+  const handleSignup = async (event) => {
     event.preventDefault();
-    // console.log('Signup', email, pass, auth);
-    createUserWithEmailAndPassword(auth, email, pass).then((userCredential) => {
-      toast.success("User registered sucessfully")
-      userCredential.user.displayName = name;
-      navigate('/home')
-    })
-      .catch((error) => {
-        toast.error('Error creating user')
-        console.log(error)
-        console.log(error.message)
-        console.log(error.code)
-      })
+    if (name && email && pass) {
+      try {
+        const { user } = await createUserWithEmailAndPassword(auth, email, pass);
+        await updateProfile(user, { displayName: name });
+        navigate('/home');
+      }
+      catch (error) {
+        toast.error('Error creating user');
+        console.log(error);
+        console.log(error.message);
+        console.log(error.code);
+      }
+
+    }
+    else {
+      toast.error("All fields are required");
+    }
+
   }
 
 

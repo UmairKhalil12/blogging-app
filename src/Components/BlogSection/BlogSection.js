@@ -15,17 +15,19 @@ export default function BlogSection({ blogs }) {
     const [loading, setLoading] = useState(true);
 
     const { userInfo, user } = useStore();
+    console.log('blogsection', userInfo);
 
     const handleBlogDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete the blog?"))
             try {
-                setLoading(true)
+                setLoading(true);
                 await deleteDoc(doc(db, 'blogs', id));
-                setLoading(false)
+                toast.success('Blog deleted successfully');
+                setLoading(false);
             }
             catch (error) {
-                toast.error('Error deleting blog')
-                console.log('error deleting blog', error)
+                toast.error('Error deleting blog');
+                console.log('error deleting blog', error);
             }
     }
 
@@ -38,7 +40,7 @@ export default function BlogSection({ blogs }) {
             <h3>Daily Blogs</h3>
             <hr></hr>
             {
-                blogs?.map((item, index) => {
+                blogs?.map((item) => {
                     return (
                         <div className='blogsection-map' key={item.id}>
                             <div>
@@ -47,8 +49,9 @@ export default function BlogSection({ blogs }) {
 
                             <div>
                                 <p className='blogsection-category'>{item.category}</p>
+                                <p className='blogsection-title'>{item.title}</p>
                                 <div className='title-timestamp'>
-                                    <p className='blogsection-title'>{item.title}</p>
+                                    <p className='blogsection-author'>{item.author}</p>
                                     <p className='blogsection-date'>{item.timestamp.toDate().toDateString()}</p>
                                 </div>
 
@@ -56,7 +59,6 @@ export default function BlogSection({ blogs }) {
 
                                 <div className='blog-readmore-edit-btn'>
                                     <div>
-                                        {console.log('link detail id', item.id)}
                                         <Link to={`/detail/${item.id}`} >
                                             <BlogButton text='Read More' />
                                         </Link>
@@ -76,10 +78,8 @@ export default function BlogSection({ blogs }) {
                             </div>
                         </div>
                     )
-
                 })
             }
-
         </div>
     )
 }

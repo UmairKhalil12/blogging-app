@@ -13,7 +13,23 @@
     justify-content: space-evenly;
 }
 
+.detail-banner-date{
+    font-weight: 500;
+}
+
 .detail-blog-description{
     width: 50%;
 }
 
+.detail-blog-author-date{
+    display: flex;
+    text-align: left;
+}
+
+.detail-blog-date{
+    margin-left: 0.5rem;
+}
+
+.detail-blog-author{
+    font-weight: 500;
+}

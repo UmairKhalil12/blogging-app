@@ -12,7 +12,7 @@ import useStore from "../../Utility/Zustand/Zustand";
 
 export default function Routing() {
     const { user } = useStore();
-    console.log('routing', user)
+    // console.log('routing', user)
     return (
         <Routes>
             {user ? <Route path="/" element={<HomePage />} /> : <Route path="/" element={<Login />} />}

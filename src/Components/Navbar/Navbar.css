@@ -50,20 +50,6 @@
     display: none;
 }
 
-.navbar-profile {
-    display: flex;
-    cursor: pointer;
-}
-
-.navbar-profile:hover {
-    color: goldenrod;
-}
-
-.profile-nav {
-    padding-top: 0.75rem;
-    margin-right: 0.5rem;
-}
-
 .navbar-main-login button {
     width: 70%;
 }
@@ -79,6 +65,30 @@
 
 .nav-signup-login-btn button{
     margin-left: 0.5rem;
+}
+
+.navbar-profile {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.navbar-profile:hover {
+    color: goldenrod;
+}
+
+.profile-nav {
+    padding-top: 0.75rem;
+    margin-right: 0.5rem;
+    /* width: 50px;
+    height: 50px; */
+}
+
+.navbar-profile-name{
+    margin-right: 1.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
 }
 
 @media screen and (max-width : 800px) {

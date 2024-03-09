@@ -2,7 +2,6 @@
     text-align: left;
 }
 
-
 .blog-btn{
     border-radius: 5px;
     border: none;
@@ -21,11 +20,13 @@
 .blog-readmore-edit-btn{
     display: flex;
     justify-content: space-between;
+    width: 80%;
 }
+
 
 .blog-edit-delete{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 .blog-edit-delete button{
@@ -61,6 +62,10 @@
     margin-left: 0.3rem;
 }
 
+.blogsection-author{
+    font-weight: 600;
+}
+
 .blogsection-description{
     text-align: center;
 }
@@ -72,10 +77,20 @@
     width: 250px;
     height: 250px;
     margin-right: 1rem;
-    margin-top: 1.5rem;
+    margin-top: 1.1rem;
 }
 
 .blogsection-map{
     margin-bottom: 1rem;
 }
 
+@media screen and (max-width : 768px) {
+    .blog-readmore-edit-btn{
+        width: 100%;
+    }
+
+    .blogsection-map{
+        text-align: left;
+    }
+    
+}

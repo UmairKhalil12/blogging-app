@@ -13,10 +13,6 @@ export default function Navbar() {
     const [toggleMenu, setToggleMenu] = useState(false)
     const { user } = useStore();
     const { userInfo } = useStore();
-    // const {name} = useStore();
-
-    // console.log('userInfo nav',userInfo)
-    // console.log('name navbr' , name);
 
     const handleToggleMenu = () => {
         setToggleMenu(!toggleMenu)
@@ -58,7 +54,7 @@ export default function Navbar() {
                             (<>
                                 <div className='navbar-profile'>
                                     <CgProfile size={30} className='profile-nav' />
-                                    <p>{userInfo.displayName}</p>
+                                    <p className='navbar-profile-name' >{userInfo.displayName}</p>
                                 </div>
                                 <Button text='Signout' />
                             </>

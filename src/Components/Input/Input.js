@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 export default function Input({ type, placeholder, id, name, value, checked, onChange , inputStyle }) {
 
-  const [togglePassword, setTogglePassword] = useState(false);
+  const [togglePassword, setTogglePassword] = useState(true);
   const [inputType, setInputType] = useState(type);
 
   //const { setEmail, setPass, setName, setSelectedOption, setText, setFile, tag, setTag, form, setForm } = useStore();
