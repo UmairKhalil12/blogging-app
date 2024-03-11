@@ -12,7 +12,7 @@ import useStore from '../../Utility/Zustand/Zustand'
 
 
 export default function BlogSection({ blogs }) {
-    const [loading, setLoading] = useState(true);
+    const [ setLoading] = useState(true);
 
     const { userInfo, user } = useStore();
     console.log('blogsection', userInfo);
@@ -70,7 +70,8 @@ export default function BlogSection({ blogs }) {
                                                 <Link to={`/update/${item.id}`}><button><FaRegEdit size={30} /></button></Link>
                                                 <button onClick={() => handleBlogDelete(item.id)} ><MdDelete size={30} /></button>
                                             </>
-                                            : null}
+                                            : null
+                                        }
 
                                     </div>
                                 </div>

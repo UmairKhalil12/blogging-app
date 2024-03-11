@@ -25,4 +25,17 @@
 .trending-blog-content-date{
     margin-left: 0.5rem;
 }
+/* 
+@media screen and (max-width : 768px) {
+    .trending-blogs-div{
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width : 550px){
+    .trending-blog-div-author-date{
+        flex-direction: column;
+    }
+} */
 

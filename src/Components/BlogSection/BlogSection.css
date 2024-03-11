@@ -20,7 +20,7 @@
 .blog-readmore-edit-btn{
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 100%;
 }
 
 
@@ -91,6 +91,13 @@
 
     .blogsection-map{
         text-align: left;
+    }
+    
+}
+
+@media screen and (max-width : 550px) {
+    .blogsection-map{
+        flex-direction: column;
     }
     
 }

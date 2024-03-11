@@ -5,9 +5,10 @@ import Login from '../Login/Login'
 import Signup from '../Signup/Signup'
 import AddEditBlog from '../AddEditBlog/AddEditBlog'
 import About from '../About/About'
-import NoPage from "../NoPage/NoPage";
+//import NoPage from "../NoPage/NoPage";
 import ForgetPassword from "../ForgetPassword/ForgetPassword";
 import useStore from "../../Utility/Zustand/Zustand";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 
 export default function Routing() {
@@ -25,7 +26,7 @@ export default function Routing() {
             {user ? <Route path="/addedit" element={<AddEditBlog />} /> : null}
             <Route path="/about" element={<About />} />
             {user ? null : <Route path="/forgetpassword" element={<ForgetPassword />} />}
-            <Route path="*" element={<NoPage />} />
+            <Route path="*" element={<ErrorPage />} />
         </Routes>
     )
 }

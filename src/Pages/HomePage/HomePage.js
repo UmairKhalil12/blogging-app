@@ -1,26 +1,25 @@
 import React from 'react'
 import './HomePage.css'
-import useStore from '../../Utility/Zustand/Zustand'
+//import useStore from '../../Utility/Zustand/Zustand'
 import { useState, useEffect } from 'react';
 import { onSnapshot } from 'firebase/firestore';
 import { collection } from 'firebase/firestore';
 import { db } from '../../Utility/Firebase/firebase';
 import { toast } from 'react-toastify';
 import BlogSection from '../../Components/BlogSection/BlogSection';
-import Heading from '../../Components/Heading/Heading';
+// Heading from '../../Components/Heading/Heading';
 import Spinner from '../../Components/Spinner/Spinner';
 import Tags from '../../Components/Tags/Tags';
 import MostPopular from '../../Components/MostPopular/MostPopular';
 import Trending from '../../Components/Trending/Trending';
+import useStore from '../../Utility/Zustand/Zustand';
 
 
 export default function HomePage() {
-  // const { name } = useStore();
-  // const { userInfo } = useStore();
   const [loading, setLoading] = useState(true);
-  const [blogs, setBlogs] = useState([])
-  const [tags, setTags] = useState([]);
-  const [trend, setTrend] = useState([])
+  const { blogs, setBlogs } = useStore();
+  const {tags, setTags} = useStore();
+  const [trend, setTrend] = useState([]);
 
   useEffect(() => {
     const subscribe = onSnapshot(
@@ -36,7 +35,6 @@ export default function HomePage() {
         setLoading(false)
         const uniqueTags = [...new Set(tags)];
         setTags(uniqueTags);
-        // trendBlog();
       }, (error) => {
         toast.error('Error fetching blogs')
         console.log("Error fetching blogs", error)
@@ -50,15 +48,22 @@ export default function HomePage() {
       subscribe()
     }
 
-  }, [])
+  }, [setBlogs , setTags])
 
   useEffect(() => {
-    const trendingBlogs = blogs.filter(blog => blog.trending === 'yes');
-    setTrend(prevTrend => [...prevTrend, ...trendingBlogs]);
-  }, [blogs])
 
+    const uniqueTrendingBlogs = new Set(trend);
 
-  // console.log('homepage trend blog', trend);
+    blogs.forEach(blog => {
+      if (blog.trending === 'yes' && !uniqueTrendingBlogs.has(blog)) {
+        uniqueTrendingBlogs.add(blog);
+      }
+    });
+
+    setTrend([...uniqueTrendingBlogs]);
+  }, [blogs, trend]);
+
+  console.log('homepage trend blog', trend);
 
   if (loading) {
     return <Spinner />

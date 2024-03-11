@@ -10,7 +10,7 @@
 
 .detail-blog{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .detail-banner-date{
@@ -18,6 +18,7 @@
 }
 
 .detail-blog-description{
+    margin-left: 1rem;
     width: 50%;
 }
 
@@ -32,4 +33,28 @@
 
 .detail-blog-author{
     font-weight: 500;
+}
+
+.detail-blog-tags{
+    margin-left: 1rem;
+}
+
+@media screen and (max-width : 768px) {
+    .detail-blog{
+        flex-direction: column;
+    }
+
+    .detail-blog-description{
+        text-align: center;
+        width: 90%;
+    }
+
+    .detail-blog-author{
+        text-align: justify;
+    }
+
+    .detail-blog{
+        display: flex;
+        justify-content: center;
+    }
 }

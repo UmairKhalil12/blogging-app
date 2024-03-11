@@ -154,6 +154,10 @@
     .navbar-profile {
         padding-bottom: 0.5rem;
     }
+
+    .nav-signup-login-btn{
+        flex-direction: column;   
+    }
 }
 
 @media screen and (max-width : 550px) {

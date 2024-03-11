@@ -14,8 +14,6 @@
 }
 
 .home-tag-popular {
-    /* margin-left: 1.25rem;
-    margin-right: 1rem; */
     width: 40%;
 }
 
@@ -29,7 +27,6 @@
     .home-blog-blogsection {
         text-align: center;
         width: 90%;
-        /* margin-left: 0; */
     }
 
     .home-tag-popular {

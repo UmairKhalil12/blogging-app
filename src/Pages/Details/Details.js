@@ -5,12 +5,18 @@ import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../../Utility/Firebase/firebase'
 import Heading from '../../Components/Heading/Heading'
 import Spinner from '../../Components/Spinner/Spinner'
+import Tags from '../../Components/Tags/Tags'
+import useStore from '../../Utility/Zustand/Zustand'
+import MostPopular from '../../Components/MostPopular/MostPopular'
 
 export default function Details() {
   const [loading, setLoading] = useState(true)
   const { id } = useParams();
   console.log('details id', id)
   const [blog, setBlog] = useState(null);
+  const { blogs } = useStore();
+  const { tags } = useStore();
+  console.log('blogs , tags', blogs, tags);
 
   const getBlogDetail = async () => {
     try {
@@ -32,7 +38,7 @@ export default function Details() {
       getBlogDetail();
       setLoading(true);
     }
-  }, [id])
+  }, [id ])
 
   if (loading) {
     return <Spinner />
@@ -62,8 +68,8 @@ export default function Details() {
         </div>
 
         <div className='detail-blog-tags'>
-          <h3>Tags</h3>
-          <h3>Most Popular</h3>
+          <Tags tags={tags} />
+          <MostPopular blogs={blogs} />
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@ import Heading from '../../Components/Heading/Heading'
 
 
 export default function Login() {
-  const { name} = useStore();
+  // const { name} = useStore();
 
   // const [name , setName] = useState();
   const [email, setEmail] = useState();

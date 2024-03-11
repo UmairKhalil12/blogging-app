@@ -12,16 +12,16 @@ export default function Trending({ blogs }) {
         nav: true,
         responsive: {
             0: {
-                item: 1
+                items: 1
             },
             400: {
-                item: 2
+                items: 2
             },
             600: {
-                item: 3
+                items: 3
             },
             1000: {
-                item: 4
+                items: 4
             },
         }
     }
@@ -31,10 +31,10 @@ export default function Trending({ blogs }) {
             <hr />
             <div>
                 <OwlCarousel className='owl-theme' {...options}>
-                    {blogs?.map((items , index) => {
+                    {blogs?.map((items, index) => {
                         return (
-                            <div>
-                                <div key={items.id} className='trending-blogs-div' style={{ backgroundImage: `url(${items.imgUrl})` }}>
+                            <div key={items.id} >
+                                <div className='trending-blogs-div' style={{ backgroundImage: `url(${items.imgUrl})` }}>
                                     <Link to={`/detail/${items.id}`}>
                                         <div>
                                             <div><p>{items.title}</p></div>

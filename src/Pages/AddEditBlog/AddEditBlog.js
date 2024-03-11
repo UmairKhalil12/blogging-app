@@ -20,9 +20,6 @@ const initialState = {
     trending: 'no',
     category: 'fashion',
     description: '',
-    // likes: [],
-    // comments: []
-
 }
 
 const categoryOption = [
@@ -172,7 +169,7 @@ export default function AddEditBlog() {
         if (id) {
             getBlogDetail();
         }
-    }, [id])
+    }, [id , getBlogDetail()])
 
 
     return (

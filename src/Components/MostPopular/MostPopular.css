@@ -30,7 +30,23 @@
     .most-popular-img{
         height: 150px;
         width: 250px;
+    }   
+}
+
+@media screen and (max-width : 550px) {
+    .most-popular{
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
     }
-  
+
+    .most-popular-blog-content{
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .most-popular-img-div{
+        margin-left: 0rem;
+    }
     
 }
