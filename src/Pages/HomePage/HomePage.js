@@ -2,7 +2,7 @@ import React from 'react'
 import './HomePage.css'
 //import useStore from '../../Utility/Zustand/Zustand'
 import { useState, useEffect } from 'react';
-import { onSnapshot } from 'firebase/firestore';
+import { doc, getDoc, getDocs, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { collection } from 'firebase/firestore';
 import { db } from '../../Utility/Firebase/firebase';
 import { toast } from 'react-toastify';
@@ -13,13 +13,17 @@ import Tags from '../../Components/Tags/Tags';
 import MostPopular from '../../Components/MostPopular/MostPopular';
 import Trending from '../../Components/Trending/Trending';
 import useStore from '../../Utility/Zustand/Zustand';
+import Search from '../../Components/Search/Search';
+import isEmpty from 'lodash/isEmpty'
+
 
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const { blogs, setBlogs } = useStore();
-  const {tags, setTags} = useStore();
+  const { tags, setTags } = useStore();
   const [trend, setTrend] = useState([]);
+  const [search, setSearch] = useState()
 
   useEffect(() => {
     const subscribe = onSnapshot(
@@ -48,7 +52,7 @@ export default function HomePage() {
       subscribe()
     }
 
-  }, [setBlogs , setTags])
+  }, [setBlogs, setTags])
 
   useEffect(() => {
 
@@ -69,22 +73,38 @@ export default function HomePage() {
     return <Spinner />
   }
 
-  // console.log('home trend blog', trend);
+  const getBlogs = async () => {
+    const blogRef = collection(db, 'blogs');
+    const blogQuerry = query(blogRef, orderBy("title"));
+    const documentSnap = await getDocs(blogQuerry);
+    setBlogs(documentSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
 
-  return (
-    <div className='main-home'>
-      <Trending blogs={trend} />
-      <div className='main-home-blogs'>
-        <div className='home-blog-blogsection'>
-          <BlogSection blogs={blogs} />
+    const handleChange = (e) => {
+      const { value } = e.target;
+      if (isEmpty(value)) {
+        getBlogs();
+      }
+      setSearch(value)
+    }
+
+    // console.log('home trend blog', trend);
+
+    return (
+      <div className='main-home'>
+        <Trending blogs={trend} />
+        <div className='main-home-blogs'>
+          <div className='home-blog-blogsection'>
+            <BlogSection blogs={blogs} />
+          </div>
+
+          <div className='home-tag-popular'>
+            <Search search='' handleChange={handleChange} />
+            <Tags tags={tags} />
+            <MostPopular blogs={blogs} />
+          </div>
+
         </div>
-
-        <div className='home-tag-popular'>
-          <Tags tags={tags} />
-          <MostPopular blogs={blogs} />
-        </div>
-
       </div>
-    </div>
-  )
+    )
+  }
 }
